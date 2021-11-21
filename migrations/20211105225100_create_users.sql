@@ -1,6 +1,8 @@
-CREATE TABLE users (
+create extension if not exists citext;
+
+create table users (
   user_id UUID PRIMARY KEY,
-  username TEXT unique,
+  username citext unique,
   display_name TEXT,
   email TEXT unique,
   password TEXT,
@@ -8,4 +10,4 @@ CREATE TABLE users (
   updated_at timestamptz
 );
 
-create unique index on users (lower(username));
+create index on users (username);
