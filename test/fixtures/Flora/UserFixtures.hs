@@ -10,6 +10,7 @@ user1 =
       email       = "pmpc@example.com"
       displayName = "Plonk McPlonkface"
       password    = PasswordHash "foobar2000"
+      imported    = False
       createdAt   = read "2021-04-23 10:00:00 UTC"
       updatedAt   = read "2021-04-23 10:00:00 UTC"
   in  User { .. }
@@ -21,6 +22,7 @@ user2 =
       email       = "princess_jack@example.com"
       displayName = "Princess Jack Moonshine"
       password    = PasswordHash "DRINK!"
+      imported    = False
       createdAt   = read "2021-04-23 14:00:00 UTC"
       updatedAt   = read "2021-04-23 14:30:00 UTC"
    in User { .. }
@@ -32,6 +34,7 @@ ben =
       email = "ben@well-typed.com"
       displayName = "Ben Gamari"
       password = PasswordHash "X{-`D>f*.9h5rZFv"
+      imported    = True
       createdAt   = read "2021-04-23 10:00:00 UTC"
       updatedAt   = read "2021-04-23 10:00:00 UTC"
    in User{..}
@@ -43,6 +46,7 @@ syl20 =
       email = "sylvain@haskus.fr"
       password = PasswordHash "X234f*.¢„5rZFv"
       displayName = "Sylvain Henry"
+      imported = True
       createdAt   = read "2021-04-23 10:00:00 UTC"
       updatedAt   = read "2021-04-23 10:00:00 UTC"
    in User{..}

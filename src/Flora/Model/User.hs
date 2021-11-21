@@ -33,6 +33,7 @@ data User = User
   , email       :: Text
   , displayName :: Text
   , password    :: PasswordHash Argon2
+  , imported    :: Bool
   , createdAt   :: UTCTime
   , updatedAt   :: UTCTime
   }
