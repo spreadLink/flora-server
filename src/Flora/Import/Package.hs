@@ -16,7 +16,11 @@ import Flora.Model.Package.Orphans ()
 import Flora.Model.Package.Types
 import Flora.Model.User
 
-cabalToPackage :: PackageId -> UserId -> UTCTime -> PackageDescription -> Either ImportError Package
+cabalToPackage :: PackageId
+               -> UserId
+               -> UTCTime
+               -> PackageDescription
+               -> Either ImportError Package
 cabalToPackage packageId ownerId timestamp packageDesc = do
   name <- getPackageName (packageDesc ^. #package)
   let license = Cabal.license packageDesc
