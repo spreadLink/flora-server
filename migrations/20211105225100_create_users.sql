@@ -11,4 +11,4 @@ create table users (
 
 create unique index on users (lower(username));
 create unique index on users (lower(email));
-create unique index on users (imported);
+create index on users (imported);

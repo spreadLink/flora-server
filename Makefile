@@ -47,6 +47,9 @@ ghcid-test: ## Load the tests in ghcid and reload them on file change
 ghcid-server: ## Start flora-server in ghcid
 	@ghcid --target=flora-server --restart="src" --test 'FloraWeb.Server.runFlora'
 
+ghcid: ## Load the main library into ghcid and reload it on file change
+	@ghcid --target flora-server -l
+
 lint: ## Run the code linter (HLint)
 	@find app test src -name "*.hs" | xargs -P $(PROCS) -I {} hlint --refactor-options="-i" --refactor {}
 

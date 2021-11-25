@@ -25,9 +25,9 @@ data HackageUserObject = HackageUserObject
   deriving anyclass (FromJSON)
 
 data HackageUserDetailsObject = HackageUserDetailsOject
-  { userid :: Word
+  { userid   :: Word
   , username :: Text
-  , groups :: [Text]
+  , groups   :: [Text]
   }
   deriving stock (Eq, Show, Generic)
   deriving anyclass (FromJSON)
