@@ -4,6 +4,18 @@
 
 @import "./fontawesome-all.min.css";
 
+.theme-light {
+  --bg-background-primar: white;
+  --bg-background-secondary: #f7fafc;
+  --bg-background-tertiary: #e2e8f0;
+}
+
+.theme-dark {
+  --bg-background-primar: #0D2438;
+  --bg-background-secondary: #102C44;
+  --bg-background-tertiary: #1E3951;
+}
+
 @media (prefers-color-scheme: dark) {
 
   a{
@@ -30,7 +42,6 @@
     --tw-text-opacity: 1;
     color: rgba(55, 65, 81, var(--tw-text-opacity));
   }
-
 }
 
 body{

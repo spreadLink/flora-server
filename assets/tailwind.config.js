@@ -15,4 +15,11 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  colors: {
+    background: {
+      primary: 'var(--bg-background-primary)',
+      secondary: 'var(--bg-background-secondary)',
+      tertiary: 'var(--bg-background-tertiary)',
+    }
+  }
 };
