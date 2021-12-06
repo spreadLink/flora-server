@@ -77,6 +77,10 @@ library
     FloraWeb.Server.Auth
     FloraWeb.Server.Logging.Metrics
     FloraWeb.Server.Logging.Tracing
+    FloraWeb.Server.Packages
+    FloraWeb.Server.Logging.Metrics
+    FloraWeb.Server.Logging.Tracing
+    FloraWeb.Server.Packages
     FloraWeb.Server.Pages
     FloraWeb.Server.Pages.Packages
     FloraWeb.Templates
