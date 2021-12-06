@@ -8,6 +8,8 @@ import Servant.Server.Generic
 
 import qualified Data.Map.Strict as Map
 import qualified FloraWeb.Server.Pages.Packages as Packages
+import qualified FloraWeb.Server.Pages.Admin as Admin
+import qualified FloraWeb.Server.Packages as Packages
 import FloraWeb.Templates
 import qualified FloraWeb.Templates.Pages.Home as Home
 import FloraWeb.Templates.Types
@@ -18,6 +20,7 @@ type Routes = ToServantApi Routes'
 data Routes' mode = Routes'
   { home     :: mode :- Get '[HTML] (Html ())
   , about    :: mode :- "about" :> Get '[HTML] (Html ())
+  , admin    :: mode :- "admin" :> Admin.Routes
   , packages :: mode :- "packages" :> Packages.Routes
   }
   deriving stock (Generic)
@@ -26,6 +29,7 @@ server :: ToServant Routes' (AsServerT FloraM)
 server = genericServerT Routes'
   { home = homeHandler
   , about = aboutHandler
+  , admin = Admin.server
   , packages = Packages.server
   }
 

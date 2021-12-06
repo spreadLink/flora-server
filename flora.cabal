@@ -62,6 +62,7 @@ library
   exposed-modules:
     Data.Aeson.Orphans
     Flora.Environment
+    Flora.Model.Admin.Report
     Flora.Model.Organisation
     Flora.Model.Package
     Flora.Model.Package.Orphans
@@ -72,12 +73,14 @@ library
     Flora.Model.User
     Flora.Publish
     FloraWeb.Server
+    FloraWeb.Server.Admin
     FloraWeb.Server.Auth
     FloraWeb.Server.Logging.Metrics
     FloraWeb.Server.Logging.Tracing
     FloraWeb.Server.Pages
     FloraWeb.Server.Pages.Packages
     FloraWeb.Templates
+    FloraWeb.Templates.Admin
     FloraWeb.Templates.Error
     FloraWeb.Templates.Layout.App
     FloraWeb.Templates.Pages.Home

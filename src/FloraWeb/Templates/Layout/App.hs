@@ -110,6 +110,7 @@ navbarSearch = do
       div_ [class_ "flex items-center py-2"] $ do
         input_ [ class_ "rounded-full bg:bg-background dark:bg-background-dark w-full mr-3 py-1 px-1 leading-tight focus:outline-none border border-2 border-brand-purple"
                , id_ "packageName", type_ "text", placeholder_ "Search a package"
+               , id_ "navbar-search-package-name", type_ "text", placeholder_ "Search a package"
                ]
     else pure mempty
 
