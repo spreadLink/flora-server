@@ -6,6 +6,7 @@ import Optics.Core
 
 import Control.Monad
 import Flora.Model.Package
+import Flora.Model.Package.Component
 import Flora.Model.Release (Release (..), insertRelease)
 import Flora.Model.Requirement (Requirement, insertRequirement)
 import Flora.Model.User (User)
@@ -13,17 +14,18 @@ import Flora.Model.User (User)
 {- TODO: Audit log of the published package
    TODO: Publish artifacts
 -}
-publishPackage :: [Requirement] -> Release -> Package -> User -> DBT IO ()
-publishPackage requirements release package _user =
+publishPackage :: [Requirement] -> [PackageComponent] -> Release -> Package -> User -> DBT IO ()
+publishPackage requirements components release package _user =
   getPackageById (package ^. #packageId)
     >>= \case
           Nothing -> do
-            createPackage package
+            insertPackage package
             insertRelease release
+            forM_ components insertPackageComponent
             forM_ requirements insertRequirement
             refreshDependents
-          Just existingPackage -> do
-            createPackage existingPackage
+          Just _existingPackage -> do
             insertRelease release
+            forM_ components insertPackageComponent
             forM_ requirements insertRequirement
             refreshDependents

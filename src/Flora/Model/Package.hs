@@ -6,7 +6,7 @@ module Flora.Model.Package
   , PackageName
   , Namespace
   , PackageMetadata(..)
-  , createPackage
+  , insertPackage
   , getPackageById
   , getPackageByNamespaceAndName
   , getPackageDependents
@@ -27,8 +27,8 @@ import Database.PostgreSQL.Transact (DBT)
 import Flora.Model.Package.Orphans ()
 import Flora.Model.Package.Types
 
-createPackage :: Package -> DBT IO ()
-createPackage package = insert @Package package
+insertPackage :: Package -> DBT IO ()
+insertPackage package = insert @Package package
 
 getPackageById :: PackageId -> DBT IO (Maybe Package)
 getPackageById packageId = selectById @Package (Only packageId)

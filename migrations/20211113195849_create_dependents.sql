@@ -1,5 +1,6 @@
 -- Copyright 2015 Six Colors AB
--- 
+-- Copyright 2021 Flora.pm development team
+--
 -- Licensed under the Apache License, Version 2.0 (the "License");
 -- you may not use this file except in compliance with the License.
 -- You may obtain a copy of the License at
@@ -19,7 +20,8 @@ create materialized view dependents (
     select distinct p3.name as name, p3.namespace as namespace, p0.package_id as dependent_id
     from "packages" as p0
     inner join "releases" as r1 on r1."package_id" = p0."package_id"
-    inner join "requirements" as r2 on r2."release_id" = r1."release_id"
+    inner join "package_components" as pc on pc."release_id" = r1."release_id"
+    inner join "requirements" as r2 on r2."package_component_id" = pc."release_id"
     inner join "packages" as p3 on p3."package_id" = r2."package_id";
 
 create index on dependents (name, dependent_id);

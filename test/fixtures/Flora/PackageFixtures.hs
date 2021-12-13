@@ -14,13 +14,16 @@ import Flora.UserFixtures
 
 -- ghc-prim
 
+emptyReqMetadata :: RequirementMetadata
+emptyReqMetadata = RequirementMetadata Nothing
+
 ghcPrim :: Package
 ghcPrim =
   let packageId = PackageId (read "7a1ae448-3fc0-11ec-a038-5405db82c3cd")
       namespace = fromJust $ parseNamespace "haskell"
       name = fromJust $ parsePackageName "ghc-prim"
       synopsis = "This package contains the primitive types and operations supplied by GHC."
-      ownerId = ben ^. #userId
+      ownerId = hackageUser ^. #userId
       createdAt = read "2014-03-23 23:03:32 UTC"
       updatedAt = read "2021-10-03 11:30:00 UTC"
       metadata = PackageMetadata
@@ -50,7 +53,7 @@ ghcBignum =
       namespace = fromJust $ parseNamespace "haskell"
       name = fromJust $ parsePackageName "ghc-bignum"
       synopsis = "This package provides the low-level implementation of the standard BigNat, Natural and Integer types."
-      ownerId = syl20 ^. #userId
+      ownerId = hackageUser ^. #userId
       createdAt = read "2014-03-23 23:03:32 UTC"
       updatedAt = read "2021-10-03 11:30:00 UTC"
       metadata = PackageMetadata
@@ -78,6 +81,7 @@ ghcBignumDepOnGhcPrim =
       releaseId = ghcBignumRelease ^. #releaseId
       packageId = ghcPrim ^. #packageId
       requirement = ">=0.5.1.0 && <0.9"
+      metadata = emptyReqMetadata
    in Requirement{..}
 
 -- base
@@ -88,7 +92,7 @@ base =
       namespace = fromJust $ parseNamespace "haskell"
       name = fromJust $ parsePackageName "base"
       synopsis = "This package contains the Standard Haskell Prelude and its support libraries, and a large collection of useful libraries ranging from data structures to parsing combinators and debugging utilities."
-      ownerId = ben ^. #userId
+      ownerId = hackageUser ^. #userId
       createdAt = read "2014-03-23 23:03:32 UTC"
       updatedAt = read "2021-11-03 11:30:00 UTC"
       metadata = PackageMetadata
@@ -116,6 +120,7 @@ baseDepOnGhcPrim =
       releaseId = baseRelease ^. #releaseId
       packageId = ghcPrim ^. #packageId
       requirement = ">=0.5.1.0 && <0.9"
+      metadata = emptyReqMetadata
    in Requirement{..}
 
 baseDepOnGhcBignum :: Requirement
@@ -124,6 +129,7 @@ baseDepOnGhcBignum =
       releaseId = baseRelease ^. #releaseId
       packageId = ghcBignum ^. #packageId
       requirement = ">=1.0 && <2.0"
+      metadata = emptyReqMetadata
    in Requirement{..}
 
 -- array
@@ -134,7 +140,7 @@ array =
       namespace = fromJust $ parseNamespace "haskell"
       name = fromJust $ parsePackageName "array"
       synopsis = "In addition to providing the Data.Array module as specified in the Haskell 2010 Language Report, this package also defines the classes IArray of immutable arrays and MArray of arrays mutable within appropriate monads, as well as some instances of these classes."
-      ownerId = user1 ^. #userId
+      ownerId = hackageUser ^. #userId
       createdAt = read "2014-03-23 23:03:32 UTC"
       updatedAt = read "2021-11-03 11:30:00 UTC"
       metadata = PackageMetadata
@@ -162,6 +168,7 @@ arrayDepOnBase =
       releaseId = arrayRelease ^. #releaseId
       packageId = base ^. #packageId
       requirement = ">=4.9 && <4.14"
+      metadata = emptyReqMetadata
    in Requirement{..}
 
 -- deepseq
@@ -172,7 +179,7 @@ deepseq =
       namespace = fromJust $ parseNamespace "haskell"
       name = fromJust $ parsePackageName "deepseq"
       synopsis = "This package provides methods for fully evaluating data structures (\"deep evaluation\")."
-      ownerId = ben ^. #userId
+      ownerId = hackageUser ^. #userId
       createdAt = read "2014-03-23 23:03:32 UTC"
       updatedAt = read "2021-11-03 11:30:00 UTC"
       metadata = PackageMetadata
@@ -200,6 +207,7 @@ deepseqDepOnBase =
       releaseId = deepseqRelease ^. #releaseId
       packageId = base ^. #packageId
       requirement = ">=4.5 && <4.17"
+      metadata = emptyReqMetadata
    in Requirement{..}
 
 deepseqDepOnArray :: Requirement
@@ -208,6 +216,7 @@ deepseqDepOnArray =
       releaseId = deepseqRelease ^. #releaseId
       packageId = array ^. #packageId
       requirement = ">=0.4 && <0.6"
+      metadata = emptyReqMetadata
    in Requirement{..}
 
 deepseqDepOnGhcPrim :: Requirement
@@ -216,6 +225,7 @@ deepseqDepOnGhcPrim =
       releaseId = deepseqRelease ^. #releaseId
       packageId = ghcPrim ^. #packageId
       requirement = ">=0.4 && <0.6"
+      metadata = emptyReqMetadata
    in Requirement{..}
 
 -- containers
@@ -226,7 +236,7 @@ containers =
       namespace = fromJust $ parseNamespace "haskell"
       name = fromJust $ parsePackageName "containers"
       synopsis = "This package contains efficient general-purpose implementations of various immutable container types including sets, maps, sequences, trees, and graphs."
-      ownerId = ben ^. #userId
+      ownerId = hackageUser ^. #userId
       createdAt = read "2014-03-23 23:03:32 UTC"
       updatedAt = read "2021-11-03 11:30:00 UTC"
       metadata = PackageMetadata
@@ -254,6 +264,7 @@ containersDepOnBase =
       releaseId = containersRelease ^. #releaseId
       packageId = base ^. #packageId
       requirement = ">=4.6 && <5"
+      metadata = emptyReqMetadata
    in Requirement{..}
 
 containersDepOnArray :: Requirement
@@ -262,6 +273,7 @@ containersDepOnArray =
       releaseId = containersRelease ^. #releaseId
       packageId = array ^. #packageId
       requirement = ">=0.4.0.0"
+      metadata = emptyReqMetadata
    in Requirement{..}
 
 containersDepOnDeepseq :: Requirement
@@ -270,6 +282,7 @@ containersDepOnDeepseq =
       releaseId = containersRelease ^. #releaseId
       packageId = deepseq ^. #packageId
       requirement = ">=1.2 && <1.5"
+      metadata = emptyReqMetadata
    in Requirement{..}
 
 -- integer-gmp
@@ -280,7 +293,7 @@ integerGmp =
       namespace = fromJust $ parseNamespace "haskell"
       name = fromJust $ parsePackageName "integer-gmp"
       synopsis = "This package provides the low-level implementation of the standard Integer type based on the GNU Multiple Precision Arithmetic Library (GMP)."
-      ownerId = ben ^. #userId
+      ownerId = hackageUser ^. #userId
       createdAt = read "2014-03-23 23:03:32 UTC"
       updatedAt = read "2021-11-03 11:30:00 UTC"
       metadata = PackageMetadata
@@ -308,6 +321,7 @@ integerGmpDepOnGhcPrim =
       releaseId = integerGmpRelease ^. #releaseId
       packageId = ghcPrim ^. #packageId
       requirement = ">=0.6.1 && <0.7"
+      metadata = emptyReqMetadata
    in Requirement{..}
 
 -- bytestring
@@ -318,7 +332,7 @@ bytestring =
       namespace = fromJust $ parseNamespace "haskell"
       name = fromJust $ parsePackageName "bytestring"
       synopsis = "Fast, compact, strict and lazy byte strings with a list interface"
-      ownerId = ben ^. #userId
+      ownerId = hackageUser ^. #userId
       createdAt = read "2014-03-23 23:03:32 UTC"
       updatedAt = read "2021-11-03 11:30:00 UTC"
       metadata = PackageMetadata
@@ -346,6 +360,7 @@ bytestringDepOnBase =
       releaseId = bytestringRelease ^. #releaseId
       packageId = base ^. #packageId
       requirement = ">=4.3 && <5"
+      metadata = emptyReqMetadata
    in Requirement{..}
 
 bytestringDepOnDeepseq :: Requirement
@@ -354,6 +369,7 @@ bytestringDepOnDeepseq =
       releaseId = bytestringRelease ^. #releaseId
       packageId = deepseq ^. #packageId
       requirement = ">=0"
+      metadata = emptyReqMetadata
    in Requirement{..}
 
 bytestringDepOnGhcBignum :: Requirement
@@ -362,6 +378,7 @@ bytestringDepOnGhcBignum =
       releaseId = bytestringRelease ^. #releaseId
       packageId = ghcBignum ^. #packageId
       requirement = ">=1.0"
+      metadata = emptyReqMetadata
    in Requirement{..}
 
 bytestringDepOnGhcPrim :: Requirement
@@ -370,6 +387,7 @@ bytestringDepOnGhcPrim =
       releaseId = bytestringRelease ^. #releaseId
       packageId = ghcPrim ^. #packageId
       requirement = ">=0"
+      metadata = emptyReqMetadata
    in Requirement{..}
 
 bytestringDepOnIntegerGmp :: Requirement
@@ -378,6 +396,7 @@ bytestringDepOnIntegerGmp =
       releaseId = bytestringRelease ^. #releaseId
       packageId = integerGmp ^. #packageId
       requirement = ">=0.2"
+      metadata = emptyReqMetadata
    in Requirement{..}
 
 -- binary
@@ -388,7 +407,7 @@ binary =
       namespace = fromJust $ parseNamespace "hackage"
       name = fromJust $ parsePackageName "binary"
       synopsis = "Binary serialisation for Haskell values using lazy ByteStrings"
-      ownerId = ben ^. #userId
+      ownerId = hackageUser ^. #userId
       createdAt = read "2014-03-23 23:03:32 UTC"
       updatedAt = read "2021-11-03 11:30:00 UTC"
       metadata = PackageMetadata
@@ -416,6 +435,7 @@ binaryDepOnArray =
       releaseId = binaryRelease ^. #releaseId
       packageId = array ^. #packageId
       requirement = ">=0"
+      metadata = emptyReqMetadata
    in Requirement{..}
 
 binaryDepOnBase :: Requirement
@@ -424,6 +444,7 @@ binaryDepOnBase =
       releaseId = binaryRelease ^. #releaseId
       packageId = base ^. #packageId
       requirement = ">=4.5.0.0 && <4.13"
+      metadata = emptyReqMetadata
    in Requirement{..}
 
 binaryDepOnBytestring :: Requirement
@@ -432,6 +453,7 @@ binaryDepOnBytestring =
       releaseId = binaryRelease ^. #releaseId
       packageId = bytestring ^. #packageId
       requirement = ">=0.10.4"
+      metadata = emptyReqMetadata
    in Requirement{..}
 
 binaryDepOnContainers :: Requirement
@@ -440,6 +462,7 @@ binaryDepOnContainers =
       releaseId = binaryRelease ^. #releaseId
       packageId = containers ^. #packageId
       requirement = ">=0"
+      metadata = emptyReqMetadata
    in Requirement{..}
 
 binaryDepOnGhcPrim :: Requirement
@@ -448,6 +471,7 @@ binaryDepOnGhcPrim =
       releaseId = binaryRelease ^. #releaseId
       packageId = ghcPrim ^. #packageId
       requirement = ">=0"
+      metadata = emptyReqMetadata
    in Requirement{..}
 
 -- nats
@@ -458,7 +482,7 @@ nats =
       namespace = fromJust $ parseNamespace "kmett"
       name = fromJust $ parsePackageName "nats"
       synopsis = "Natural numbers."
-      ownerId = user1 ^. #userId
+      ownerId = hackageUser ^. #userId
       createdAt = read "2014-03-23 23:03:32 UTC"
       updatedAt = read "2021-11-03 11:30:00 UTC"
       metadata = PackageMetadata
@@ -486,6 +510,7 @@ nats111DepOnBase =
       releaseId = natsRelease111 ^. #releaseId
       packageId = base ^. #packageId
       requirement = ">=2 && <5"
+      metadata = emptyReqMetadata
    in Requirement{..}
 
 natsRelease112 :: Release
@@ -506,7 +531,7 @@ stm =
       namespace = fromJust $ parseNamespace "haskell"
       name = fromJust $ parsePackageName "stm"
       synopsis = "Software Transactional Memory, or STM, is an abstraction for concurrent communication. The main benefits of STM are composability and modularity. That is, using STM you can write concurrent abstractions that can be easily composed with any other abstraction built using STM, without exposing the details of how your abstraction ensures safety. This is typically not the case with other forms of concurrent communication, such as locks or MVars."
-      ownerId = user1 ^. #userId
+      ownerId = hackageUser ^. #userId
       createdAt = read "2014-03-23 23:03:32 UTC"
       updatedAt = read "2021-11-03 11:30:00 UTC"
       metadata = PackageMetadata
@@ -534,6 +559,7 @@ stmDepOnBase =
       releaseId = stmRelease ^. #releaseId
       packageId = base ^. #packageId
       requirement = ">=4.3 && <4.15"
+      metadata = emptyReqMetadata
    in Requirement{..}
 
 stmDepOnArray :: Requirement
@@ -542,6 +568,7 @@ stmDepOnArray =
       releaseId = stmRelease ^. #releaseId
       packageId = array ^. #packageId
       requirement = ">=0.3 && <0.6"
+      metadata = emptyReqMetadata
    in Requirement{..}
 
 
@@ -553,7 +580,7 @@ package1 =
       namespace = fromJust $ parseNamespace "tchoutri"
       name = fromJust $ parsePackageName "acme-unexpected"
       synopsis = "Nobody expects the ACME corporation!"
-      ownerId = user1 ^. #userId
+      ownerId = hackageUser ^. #userId
       createdAt = read "2021-04-23 11:00:00 UTC"
       updatedAt = read "2021-04-23 11:00:00 UTC"
       metadata = PackageMetadata
