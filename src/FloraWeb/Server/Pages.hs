@@ -7,7 +7,6 @@ import Servant.HTML.Lucid
 import Servant.Server.Generic
 
 import qualified Data.Map.Strict as Map
-import qualified FloraWeb.Server.Packages as Packages
 import qualified FloraWeb.Server.Pages.Admin as Admin
 import qualified FloraWeb.Server.Pages.Packages as Packages
 import FloraWeb.Templates

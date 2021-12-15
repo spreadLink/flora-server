@@ -73,12 +73,11 @@ library
     Flora.Model.User
     Flora.Publish
     FloraWeb.Server
-    FloraWeb.Server.Admin
     FloraWeb.Server.Auth
     FloraWeb.Server.Logging.Metrics
     FloraWeb.Server.Logging.Tracing
-    FloraWeb.Server.Packages
     FloraWeb.Server.Pages
+    FloraWeb.Server.Pages.Admin
     FloraWeb.Server.Pages.Packages
     FloraWeb.Templates
     FloraWeb.Templates.Admin

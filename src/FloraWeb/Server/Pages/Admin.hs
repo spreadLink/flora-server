@@ -1,4 +1,4 @@
-module FloraWeb.Server.Admin where
+module FloraWeb.Server.Pages.Admin where
 
 import Control.Monad.Reader
 import Database.PostgreSQL.Entity.DBT (withPool)
