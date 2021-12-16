@@ -2,7 +2,6 @@ module FloraWeb.Server.Pages.Admin where
 
 import Control.Monad.Reader
 import Database.PostgreSQL.Entity.DBT (withPool)
-import FloraWeb.Types
 import Lucid
 import Servant
 import Servant.API.Generic
@@ -14,6 +13,8 @@ import Flora.Model.Admin.Report
 import FloraWeb.Templates
 import qualified FloraWeb.Templates.Admin as Templates
 import FloraWeb.Templates.Types
+import Optics.Core
+import FloraWeb.Server.Auth
 
 type Routes = ToServantApi Routes'
 
@@ -22,13 +23,13 @@ data Routes' mode = Routes'
   }
   deriving stock (Generic)
 
-server :: ToServant Routes' (AsServerT FloraM)
+server :: ToServant Routes' (AsServerT FloraAdminM)
 server = genericServerT Routes'
   { index = indexHandler
   }
 
-indexHandler :: FloraM (Html ())
+indexHandler :: FloraAdminM (Html ())
 indexHandler = do
-  FloraEnv{pool} <- ask
+  FloraEnv{pool} <- asks (\callInfo -> callInfo ^. #floraEnv)
   report <- liftIO $ withPool pool getReport
   render emptyAssigns (Templates.index report)
