@@ -10,11 +10,11 @@ import Servant.Server.Generic
 
 import Flora.Environment
 import Flora.Model.Admin.Report
+import FloraWeb.Server.Auth
 import FloraWeb.Templates
 import qualified FloraWeb.Templates.Admin as Templates
 import FloraWeb.Templates.Types
 import Optics.Core
-import FloraWeb.Server.Auth
 
 type Routes = ToServantApi Routes'
 

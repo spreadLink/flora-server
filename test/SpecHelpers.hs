@@ -15,18 +15,15 @@ migrate conn = do
   void $ runMigrations conn defaultOptions [MigrationInitialization, MigrationDirectory "./migrations"]
   pool <- createPool (pure conn) close 1 10 1
   withPool pool $ do
-    insertUser user1
-    insertUser user2
-    insertUser ben
-    insertUser syl20
+    insertUser hackageUser
 
-    publishPackage [] ghcPrimRelease ghcPrim syl20
-    publishPackage [ghcBignumDepOnGhcPrim] ghcBignumRelease ghcBignum ben
-    publishPackage [baseDepOnGhcPrim, baseDepOnGhcBignum] baseRelease base ben
-    publishPackage [arrayDepOnBase] arrayRelease array user1
-    publishPackage [deepseqDepOnBase, deepseqDepOnArray, deepseqDepOnGhcPrim] deepseqRelease deepseq user1
-    publishPackage [stmDepOnBase, stmDepOnArray] stmRelease stm user1
-    publishPackage [containersDepOnBase, containersDepOnArray, containersDepOnDeepseq] containersRelease containers user1
-    publishPackage [integerGmpDepOnGhcPrim] integerGmpRelease integerGmp user1
-    publishPackage [bytestringDepOnBase, bytestringDepOnDeepseq, bytestringDepOnGhcBignum, bytestringDepOnGhcPrim, bytestringDepOnIntegerGmp] bytestringRelease bytestring syl20
-    publishPackage [binaryDepOnArray, binaryDepOnBase, binaryDepOnBytestring, binaryDepOnContainers, binaryDepOnGhcPrim] binaryRelease binary user2
+    publishPackage [] ghcPrimRelease ghcPrim hackageUser
+    publishPackage [ghcBignumDepOnGhcPrim] ghcBignumRelease ghcBignum hackageUser
+    publishPackage [baseDepOnGhcPrim, baseDepOnGhcBignum] baseRelease base hackageUser
+    publishPackage [arrayDepOnBase] arrayRelease array hackageUser
+    publishPackage [deepseqDepOnBase, deepseqDepOnArray, deepseqDepOnGhcPrim] deepseqRelease deepseq hackageUser
+    publishPackage [stmDepOnBase, stmDepOnArray] stmRelease stm hackageUser
+    publishPackage [containersDepOnBase, containersDepOnArray, containersDepOnDeepseq] containersRelease containers hackageUser
+    publishPackage [integerGmpDepOnGhcPrim] integerGmpRelease integerGmp hackageUser
+    publishPackage [bytestringDepOnBase, bytestringDepOnDeepseq, bytestringDepOnGhcBignum, bytestringDepOnGhcPrim, bytestringDepOnIntegerGmp] bytestringRelease bytestring hackageUser
+    publishPackage [binaryDepOnArray, binaryDepOnBase, binaryDepOnBytestring, binaryDepOnContainers, binaryDepOnGhcPrim] binaryRelease binary hackageUser

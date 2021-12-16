@@ -35,9 +35,8 @@ import FloraWeb.Templates.Types
 type Routes = ToServantApi Routes'
 
 data Routes' mode = Routes'
-  { --new  :: mode :- "new" :> AuthProtect "cookie-auth" :> Get '[HTML] (Html ())
-    show :: mode :-  Capture "organisation" Text :> Capture "package" Text :> Get '[HTML] (Html ())
-  , showVersion :: mode :- Capture "organisation" Text :> Capture "package" Text :> Capture "version" Text :> Get '[HTML] (Html ())
+  { show :: mode :-  Capture "namespace" Text :> Capture "package" Text :> Get '[HTML] (Html ())
+  , showVersion :: mode :- Capture "namespace" Text :> Capture "package" Text :> Capture "version" Text :> Get '[HTML] (Html ())
   }
   deriving stock (Generic)
 
