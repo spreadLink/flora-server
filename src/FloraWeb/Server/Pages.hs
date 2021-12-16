@@ -1,30 +1,35 @@
 module FloraWeb.Server.Pages where
 
 import Control.Monad.Reader
+import qualified Data.Map.Strict as Map
 import Lucid
+import Network.HTTP.Types (forbidden403)
+import Optics.Core
 import Servant
 import Servant.API.Generic
 import Servant.HTML.Lucid
 import Servant.Server.Generic
+import Web.Cookie (SetCookie)
 
-import qualified Data.Map.Strict as Map
 import Flora.Environment
 import FloraWeb.Server.Auth
 import qualified FloraWeb.Server.Pages.Admin as Admin
 import qualified FloraWeb.Server.Pages.Packages as Packages
+import FloraWeb.Server.Pages.Sessions
 import FloraWeb.Templates
 import FloraWeb.Templates.Error
 import qualified FloraWeb.Templates.Pages.Home as Home
 import FloraWeb.Templates.Types
-import Network.HTTP.Types
-import Optics.Core
 
-type Routes = ToServantApi Routes'
+type Routes
+  = AuthProtect "cookie-auth"
+  :> ToServantApi Routes'
 
 data Routes' mode = Routes'
   { home     :: mode :- Get '[HTML] (Html ())
   , about    :: mode :- "about" :> Get '[HTML] (Html ())
   , admin    :: mode :- "admin" :> Admin.Routes
+  , login    :: mode :- "login" :> Session.Routes
   , packages :: mode :- "packages" :> Packages.Routes
   }
   deriving stock (Generic)
@@ -37,6 +42,7 @@ server = genericServerT Routes'
   , packages = Packages.server
   }
 
+-- | Yes it is contravariant.
 ensureUser :: FloraAdminM a -> FloraPageM a
 ensureUser adminM = do
   mUser <- asks (\callInfo -> callInfo ^. #userInfo)

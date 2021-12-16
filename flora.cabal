@@ -79,6 +79,7 @@ library
     FloraWeb.Server.Pages
     FloraWeb.Server.Pages.Admin
     FloraWeb.Server.Pages.Packages
+    FloraWeb.Server.Pages.Sessions
     FloraWeb.Templates
     FloraWeb.Templates.Admin
     FloraWeb.Templates.Error
@@ -106,6 +107,7 @@ library
     , envparse                   ^>=0.5
     , hashable                   ^>=1.3
     , http-types                 ^>=0.12
+    , http-api-data              ^>=0.4
     , lucid                      ^>=2.10
     , lucid-alpine               ^>=0.1
     , lucid-svg                  ^>=0.7

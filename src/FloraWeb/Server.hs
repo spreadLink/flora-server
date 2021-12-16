@@ -28,7 +28,7 @@ import FloraWeb.Types
 
 data Routes mode = Routes
   { assets :: mode :- "static" :> Raw
-  , pages  :: mode :- AuthProtect "cookie-auth" :> Pages.Routes
+  , pages  :: mode :- Pages.Routes
   }
   deriving stock (Generic)
 
