@@ -1,0 +1,4 @@
+
+exec nix-shell --command $'
+
+

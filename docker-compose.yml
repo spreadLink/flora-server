@@ -1,0 +1,22 @@
+
+version: "3"
+services:
+  flora-pm:
+    build: .
+    ports:
+      - "8083:8083"
+      - "5432:5432"
+    volumes:
+      - database-data:/flora-server/pgdata/
+    links:
+      - database
+          
+  database:
+    image: "postgres"
+    env_file:
+      - database.env
+    volumes:
+      - database-data:/flora-server/pgdata/
+    
+volumes:
+  database-data:
